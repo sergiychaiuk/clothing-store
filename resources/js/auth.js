@@ -23,7 +23,7 @@ const config = {
     logoutData: {
         url: 'auth/logout',
         method: 'POST',
-        redirect: '',
+        redirect: '/home',
         makeRequest: true
     },
     fetchData: {

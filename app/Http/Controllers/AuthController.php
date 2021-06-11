@@ -12,6 +12,8 @@ class AuthController extends Controller
     public function register(Request $request): \Illuminate\Http\JsonResponse
     {
         $v = Validator::make($request->all(), [
+            'phone' => 'required',
+            'pip' => 'required',
             'email' => 'required|email|unique:users',
             'password'  => 'required|min:3|confirmed',
         ]);
@@ -23,8 +25,11 @@ class AuthController extends Controller
             ], 422);
         }
         $user = new User;
+        $user->phone = $request->phone;
+        $user->pip = $request->pip;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->role = 1;
         $user->save();
         return response()->json(['status' => 'success'], 200);
     }
